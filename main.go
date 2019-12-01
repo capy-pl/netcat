@@ -2,25 +2,26 @@ package main
 
 import (
 	"flag"
-	"fmt"
+	"log"
 	"os"
 )
 
 func main() {
-	args := Init()
+	args := configArgs()
 	flag.Parse()
 	if *args.Help == true {
 		flag.PrintDefaults()
 		os.Exit(0)
 	}
+
 	if *args.Listen {
 		if *args.Port != 0 {
-			fmt.Printf("Start to listening on port %v.\n", *args.Port)
+			log.Printf("Start to listening on port %d\n", *args.Port)
+			listen(*args.Port)
 		} else {
-			fmt.Fprintf(os.Stderr, "Error: Port not provided.\n")
-			os.Exit(1)
+			panic("Error: Port not provided.\n")
 		}
 	}
-	// host := flag.Arg(0)
-	// port := flag.Arg(1)
+
+	connectTo(flag.Arg(0), flag.Arg(1))
 }
