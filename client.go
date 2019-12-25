@@ -37,8 +37,6 @@ func connectTo(arg1 string, arg2 string) {
 
 	reader := bufio.NewReader(os.Stdin)
 
-	// connW := bufio.NewWriter(conn)
-
 	for {
 		buf, err := reader.ReadBytes('\n')
 
